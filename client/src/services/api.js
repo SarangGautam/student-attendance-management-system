@@ -1,3 +1,5 @@
+
+const API_BASE_URL = import.meta.env.VITE_API_URL || '';
 export class ApiError extends Error {
   constructor(message, status, code, errors = {}) {
     super(message)
@@ -11,7 +13,7 @@ export class ApiError extends Error {
 export async function apiRequest(path, options = {}) {
   let response
   try {
-    response = await fetch(path, {
+    response = await fetch(`${API_BASE_URL}${path}`, {
       ...options,
       credentials: 'include',
       headers: {
